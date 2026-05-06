@@ -1,6 +1,13 @@
 const defaultCurrencies = ['UAH', 'USD', 'EUR'];
 
-export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
+type PropsType = {
+	value: number;
+	currency: string;
+	onChangeValue: (e: number) => void;
+	onChangeCurrency: (cur: string, value: number) => void;
+};
+
+export const Block = ({ value, currency, onChangeValue, onChangeCurrency }: PropsType) => (
 	<div className="block">
 		<ul className="currencies">
 			{defaultCurrencies.map((cur) => (
@@ -13,10 +20,10 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
 			))}
 		</ul>
 		<input
-			onChange={(e) => onChangeValue(e.target.value)}
+			onChange={(e) => onChangeValue(Number(e.target.value))}
 			value={value}
 			type="number"
-			placeholder={0}
+			placeholder={'0'}
 		/>
 	</div>
 );

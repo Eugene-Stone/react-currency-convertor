@@ -8,13 +8,7 @@ function App() {
 	const [fromCurrencyValue, setFromCurrencyValue] = useState(1);
 	const [toCurrencyValue, setToCurrencyValue] = useState(0);
 
-	// const [exchangeRate, setExchangeRate] = useState([]);
-
-	const exchangeRateRef = useRef([]);
-
-	const showConsoleLog = useEffectEvent((json) => {
-		console.log(json);
-	});
+	const exchangeRateRef = useRef<{ CurrencyCodeL: string; Amount: number }[]>([]);
 
 	var handleFromCurrencyInitEvent = useEffectEvent(() => {
 		handleFromCurrencyValue(1);
@@ -28,12 +22,12 @@ function App() {
 				// setExchangeRate(json);
 				handleFromCurrencyInitEvent();
 				exchangeRateRef.current = json;
-				showConsoleLog(json);
+				// showConsoleLog(json);
 			})
 			.catch((err) => console.error('Ошибка загрузки:', err));
 	}, []);
 
-	const getRate = (currency) => {
+	const getRate = (currency: string) => {
 		if (currency === 'UAH') return 1;
 
 		// const rates = exchangeRate.find((item) => item.CurrencyCodeL === currency);
@@ -42,19 +36,19 @@ function App() {
 		return rates ? rates.Amount : 1;
 	};
 
-	function handleFromCurrencyChoice(currency, value) {
+	function handleFromCurrencyChoice(currency: string, value: number) {
 		setFromCurrency(currency);
 
 		// handleFromCurrencyValue(value);
 	}
 
-	function handleToCurrencyChoice(currency, value) {
+	function handleToCurrencyChoice(currency: string, value: number) {
 		setToCurrency(currency);
 
 		// handleToCurrencyValue(value);
 	}
 
-	function handleFromCurrencyValue(value) {
+	function handleFromCurrencyValue(value: number) {
 		if (!exchangeRateRef.current.length) return;
 
 		const fromRate = getRate(fromCurrency);
@@ -65,7 +59,7 @@ function App() {
 		setToCurrencyValue(result);
 	}
 
-	function handleToCurrencyValue(value) {
+	function handleToCurrencyValue(value: number) {
 		if (!exchangeRateRef.current.length) return;
 
 		const fromRate = getRate(fromCurrency);
