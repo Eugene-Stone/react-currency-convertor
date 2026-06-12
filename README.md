@@ -1,16 +1,65 @@
-# React + Vite
+# Конвертер валют на React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Простой веб-приложение для конвертации валют на основе локального набора курсов.
 
-Currently, two official plugins are available:
+## О проекте
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Приложение содержит две панели:
+- первая панель для ввода исходной суммы и выбора валюты отправления;
+- вторая панель для выбора валюты назначения и отображения результата конвертации.
 
-## React Compiler
+Курсы загружаются из локального файла `public/data/exchange-rate.json`, а расчёт выполняется на клиенте.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Особенности
 
-## Expanding the ESLint configuration
+- Поддержка валют: `UAH`, `USD`, `EUR`
+- Динамический расчет при вводе суммы
+- Смена валюты одним кликом
+- Стилизация через Sass (`SCSS`)
+- Основано на React 19 и Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Технологии
+
+- React 19
+- Vite
+- TypeScript
+- Sass
+- ESLint
+
+## Запуск проекта
+
+Установите зависимости и запустите проект в режиме разработки:
+
+```bash
+npm install
+npm run dev
+```
+
+Откройте локальный сервер, который покажет Vite после старта.
+
+## Скрипты
+
+- `npm run dev` — запуск в режиме разработки
+- `npm run build` — сборка проекта
+- `npm run preview` — предпросмотр собранной версии
+- `npm run lint` — проверка ESLint
+
+## Структура проекта
+
+- `src/App.tsx` — основной компонент приложения
+- `src/Block.tsx` — компонент блока ввода суммы и выбора валюты
+- `src/index.scss` — стили приложения
+- `public/data/exchange-rate.json` — локальные курсы валют
+
+## Как работает
+
+1. При загрузке приложение получает курсы из `public/data/exchange-rate.json`.
+2. По умолчанию выбран `USD` и `UAH`.
+3. При вводе суммы или смене валюты пересчитывается значение в другом поле.
+
+## Возможные улучшения
+
+- подключение реального API курсов валют;
+- поддержка большего числа валют в UI;
+- улучшение обработки случаев, когда курсы не загружены;
+- добавление истории конвертаций и выбора даты курса.
